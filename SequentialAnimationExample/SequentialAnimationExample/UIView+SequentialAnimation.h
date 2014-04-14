@@ -21,4 +21,12 @@
       eachCompletion:(void(^)(UIView*, NSInteger))iterationCompletionBlock
           completion:(void(^)(void))completionBlock;
 
++ (void)animateViews:(NSArray*)views
+        withDuration:(CGFloat)duration
+               delay:(double)delay
+          animations:(void(^)(UIView*, NSInteger))animationBlock
+      eachCompletion:(void(^)(UIView*, NSInteger))iterationCompletionBlock
+          completion:(void(^)(void))completionBlock
+             options:(UIViewAnimationOptions)animationOptions;
+
 @end
