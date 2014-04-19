@@ -7,7 +7,7 @@
 @implementation UIView (SequentialAnimation)
 
 + (void)animateViews:(NSArray *)views
-        withDuration:(CGFloat)duration
+        withDuration:(double)duration
           animations:(void (^)(UIView *, NSInteger))animationBlock
 {
     [self animateViews:views
@@ -17,7 +17,7 @@
 }
 
 + (void)animateViews:(NSArray*)views
-        withDuration:(CGFloat)duration
+        withDuration:(double)duration
           animations:(void(^)(UIView*, NSInteger))animationBlock
           completion:(void(^)(void))completionBlock
 {
@@ -29,7 +29,7 @@
 }
 
 + (void)animateViews:(NSArray*)views
-        withDuration:(CGFloat)duration
+        withDuration:(double)duration
           animations:(void(^)(UIView*, NSInteger))animationBlock
       eachCompletion:(void(^)(UIView*, NSInteger))iterationCompletionBlock
           completion:(void(^)(void))completionBlock
@@ -44,7 +44,7 @@
 }
 
 + (void)animateViews:(NSArray*)views
-        withDuration:(CGFloat)duration
+        withDuration:(double)duration
                delay:(double)delay
           animations:(void(^)(UIView*, NSInteger))animationBlock
       eachCompletion:(void(^)(UIView*, NSInteger))iterationCompletionBlock
@@ -52,7 +52,7 @@
              options:(UIViewAnimationOptions)animationOptions
 {
     NSInteger currentIndex = 0;
-    CGFloat completionTime = 0.0;; // delay time until animations are complete
+    double completionTime = 0.0; // delay time until animations are complete
     if (duration)
     {
         /* Iteratively perform the animationBlock on the subviews,

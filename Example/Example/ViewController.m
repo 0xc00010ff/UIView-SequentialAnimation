@@ -22,9 +22,10 @@
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     [self setupBlockViews];
+    [self setupGestureRecognizer];
 }
 
-- (IBAction)viewTapped:(UITapGestureRecognizer *)sender
+- (void)viewTapped:(UITapGestureRecognizer *)sender
 {
     [self animateBlockViews];
 }
@@ -33,7 +34,7 @@
 {
     CGFloat blockViewPadding = 10.0f;
     CGFloat blockViewWidth = ([UIScreen mainScreen].bounds.size.width - ((kNumberOfBlocks+1) * blockViewPadding))
-                                                            / kNumberOfBlocks;
+    / kNumberOfBlocks;
     
     for (NSInteger i = 0; i <= kNumberOfBlocks; i++)
     {
@@ -51,6 +52,13 @@
         
         [self.view addSubview:view];
     }
+}
+
+- (void)setupGestureRecognizer
+{
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(viewTapped:)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)animateBlockViews

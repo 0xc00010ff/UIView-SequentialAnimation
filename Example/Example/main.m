@@ -1,8 +1,8 @@
 //
 //  main.m
-//  SequentialAnimationExample
+//  Example
 //
-//  Created by ----- --- on 3/29/14.
+//  Created by ----- --- on 4/19/14.
 //  Copyright (c) 2014 Association Business Computer Application Brian Cox. All rights reserved.
 //
 
