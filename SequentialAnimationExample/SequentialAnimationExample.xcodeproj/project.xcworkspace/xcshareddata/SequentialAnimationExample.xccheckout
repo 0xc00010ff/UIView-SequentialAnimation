@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D745D157-C415-43C5-BBD4-D6C7CEC147C0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SequentialAnimationExample</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>86ED67D1-EFB3-4E44-BC11-F48F561D2CC5</key>
+		<string>https://github.com/0xc00010ff/UIView-SequentialAnimation.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SequentialAnimationExample/SequentialAnimationExample.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>86ED67D1-EFB3-4E44-BC11-F48F561D2CC5</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/0xc00010ff/UIView-SequentialAnimation.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>86ED67D1-EFB3-4E44-BC11-F48F561D2CC5</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>86ED67D1-EFB3-4E44-BC11-F48F561D2CC5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>UIView-SequentialAnimation</string>
+		</dict>
+	</array>
+</dict>
+</plist>
