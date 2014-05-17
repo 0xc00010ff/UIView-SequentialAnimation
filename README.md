@@ -1,7 +1,7 @@
 UIView-SequentialAnimation
 ==========================
 
-### Category on UIView that schedules sequential animations for an array of views. 
+### A UIView category method that provides a simple declarative API for scheduling a sequence of animations
 
 #### Methods:
 ``` objective-c
@@ -57,30 +57,32 @@ A block that is called only after all animations have completed.
 UIViewAnimationOptions for speed curves, autoreversing, and so on. 
 
 
-#### Example:
-##### 'Pop' (inflate/deflate) a set of views, except for the last view, which will shrink and stay shrunken.
+#### Simple example:
+##### 'Pop' (inflate/deflate) a set of views.
              
 ``` objective-c
     [UIView animateViews:arrayOfViews
             withDuration:0.25
                    delay:-0.1
-              animations:^(UIView * view, NSInteger iteration) {
+              animations:^(UIView * view, NSInteger iteration) 
+              {
                   // Enlarge the views's layer
-                  CGFloat scaleDelta = (iteration == [arrayOfViews count]-1) 0.5f : 1.5f;
+                  CGFloat scaleDelta = 1.5f;
                   CATransform3D scaleTransform = CATransform3DMakeScale(scaleDelta, scaleDelta, 1.0);
                   view.layer.transform = scaleTransform;
               }
-          eachCompletion:^(UIView * view, NSInteger iteration) {
-              // Return the view to it's original size
-              if (iteration != ([arrayOfViews count]-1))
+              eachCompletion:^(UIView * view, NSInteger iteration) 
               {
-                  [UIView animateWithDuration:duration animations:^{
-                      CATransform3D scaleTransform = CATransform3DIdentity;
-                      view.layer.transform = scaleTransform;
-                  }];
-              }
-          } completion:^{
+                // Return the view to it's original size
+                [UIView animateWithDuration:duration animations:^{
+                    CATransform3D scaleTransform = CATransform3DIdentity;
+                    view.layer.transform = scaleTransform;
+                }];
+             }     
+             completion:^
+             {
                 NSLog(@"Wow. So animation. Very abstraction.");
-            } options:UIViewAnimationOptionCurveEaseOut];
+             } 
+             options:UIViewAnimationOptionCurveEaseOut];
 ```
              
