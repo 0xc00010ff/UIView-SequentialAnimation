@@ -52,7 +52,6 @@
              options:(UIViewAnimationOptions)animationOptions
 {
     NSInteger currentIndex = 0;
-    double completionTime = 0.0; // delay time until animations are complete
     if (duration)
     {
         /* Iteratively perform the animationBlock on the subviews,
@@ -62,9 +61,7 @@
         for (UIView *view in views)
         {
             double time = CACurrentMediaTime();
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
-                                         (int64_t)((currentAnimationStartDelay) * NSEC_PER_SEC)),
-                           dispatch_get_main_queue(), ^{
+            dispatch_critical(currentAnimationStartDelay, ^{
                                [UIView animateWithDuration:duration
                                                      delay:0
                                                    options:animationOptions
@@ -89,12 +86,7 @@
         if (completionBlock)
         {
             // call the completion block when all animations are done
-            completionTime = currentAnimationStartDelay;
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
-                                         (int64_t)(completionTime * NSEC_PER_SEC)),
-                           dispatch_get_main_queue(),
-                           completionBlock);
+            dispatch_critical(currentAnimationStartDelay, completionBlock);
         }
     }
     else // perform the view manipulation synchronously to avoid overhead of GCD scheduling
@@ -106,6 +98,31 @@
             currentIndex++;
         }
         if (completionBlock) completionBlock();
+    }
+}
+
+#pragma mark - dispatch_critical -
+// Utility to enforce strict animation start time
+void dispatch_critical(double delayInSeconds, dispatch_block_t executionBlock)
+{
+    if (!executionBlock) { return; }
+    
+    int leeway = 0; // prevent GCD from scheduling blocks when convenient
+    dispatch_queue_t queue = dispatch_queue_create("_dispatch_critical_q_", 0);
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    if (timer)
+    {
+        dispatch_source_set_timer(timer,
+                                  dispatch_walltime(DISPATCH_TIME_NOW,
+                                                    NSEC_PER_SEC * delayInSeconds),
+                                  DISPATCH_TIME_FOREVER, leeway);
+        dispatch_source_set_event_handler(timer, ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                executionBlock();
+                dispatch_source_cancel(timer);
+            });
+        });
+        dispatch_resume(timer);
     }
 }
 
